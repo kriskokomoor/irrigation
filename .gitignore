@@ -2,3 +2,23 @@
 __pycache__/
 *.pyc
 *.pyo
+
+# OS
+.DS_Store
+
+# Arduino / build
+*.bin
+*.elf
+*.map
+
+# Logs
+*.log
+
+# VSCode
+.vscode/
+
+# Docker
+*.pid
+
+EOF
+tools/arduino-ide_2.3.8_Linux_64bit.AppImage
