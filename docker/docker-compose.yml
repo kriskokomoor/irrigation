@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: docker/api.Dockerfile
+    container_name: irrigation_api
+    env_file:
+      - ../.env
+    ports:
+      - "7999:7999"
+    volumes:
+      - ../data/logs:/data/logs
+      - ../data/status:/data/status
+    restart: unless-stopped
