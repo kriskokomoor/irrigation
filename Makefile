@@ -9,6 +9,9 @@ arduinoIDE:
 up:
 	docker compose -f docker/docker-compose.yml up --build
 
+upd:
+	docker compose -f docker/docker-compose.yml up --build -d
+
 down:
 	docker compose -f docker/docker-compose.yml down
 

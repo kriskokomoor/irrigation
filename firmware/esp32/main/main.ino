@@ -14,12 +14,12 @@ const int relayPins[4] = {A0, A2, A4, A6};
 // LOW = ON (relay is active low)
 void setRelay(int zone, bool on) {
   if (zone < 1 || zone > 4) return;
-  digitalWrite(relayPins[zone - 1], on ? RELAY_OFF : RELAY_ON);
+  digitalWrite(relayPins[zone - 1], on ? RELAY_ON : RELAY_OFF);
 }
 
 bool getRelayState(int zone) {
   if (zone < 1 || zone > 4) return false;
-  return digitalRead(relayPins[zone - 1]) == RELAY_OFF;
+  return digitalRead(relayPins[zone - 1]) == RELAY_ON;
 }
 
 // ----------- HTTP handlers -----------
@@ -64,27 +64,20 @@ void setup() {
   Serial.begin(115200);
 
   const int* relays = relayPins;
+  
   for (int i = 0; i < 4; i++) {
     pinMode(relays[i], OUTPUT);
     digitalWrite(relays[i], RELAY_OFF);  // OFF for HIGH-trigger relay
   }
 
   delay(1000);  // give USB time to come up
-  Serial.println("BOOTED");
-
-  // 🔒 HARDENED INIT: prevent relay chatter
-  for (int i = 0; i < 4; i++) {
-    pinMode(relayPins[i], INPUT_PULLUP); // ensure HIGH via pull-up
-  }
-
-  delay(50); // let lines settle
-
-  for (int i = 0; i < 4; i++) {
-    pinMode(relayPins[i], OUTPUT);
-    digitalWrite(relayPins[i], RELAY_ON); // OFF
-  }
 
   Serial.println("BOOTING...");
+  
+  for (int i = 0; i < 4; i++) {
+    pinMode(relayPins[i], OUTPUT);
+    digitalWrite(relayPins[i], RELAY_OFF);  // LOW = OFF
+  }
 
   // WiFi
   WiFi.begin(ssid, password);
