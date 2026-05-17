@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 import logging
 
-from .routes import zones
+from .routes import menu, zones
 from .config import ESP32_BASE_URL
 
 
@@ -15,4 +15,5 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+app.include_router(menu.router)
 app.include_router(zones.router)

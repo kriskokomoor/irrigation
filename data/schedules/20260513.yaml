@@ -1,0 +1,16 @@
+zones:
+  - zone: 1 # garden
+    start: "05:30"
+    duration_minutes: 10
+
+  - zone: 2 # trees
+    start: "05:45"
+    duration_minutes: 10
+
+  - zone: 3 # ornamental corner
+    start: "05:55"
+    duration_minutes: 10
+
+  - zone: 1
+    start: "19:00"
+    duration_minutes: 10
